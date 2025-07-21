@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máy tính ngày dự sinh - Flo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Flatpickr CSS (Thư viện chọn ngày) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Google Fonts (Poppins) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Tùy chỉnh -->
+    <style>
+        /* Biến màu và Font chữ chung */
+        :root {
+            --flo-pink: #e94079;
+            --flo-light-purple: #f8f3ff;
+            --flo-border-color: #e0e0e0;
+            --flo-text-dark: #212529;
+            --flo-text-secondary: #6c757d;
+            --brand-pink: #e91e63;
+            --brand-pink-dark: #c2185b;
+            --brand-pink-light: #fce4ec;
+            --brand-purple: #9c27b0;
+            --brand-purple-light: #f3e5f5;
+            --text-dark: #343a40;
+            --text-muted: #6c757d;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* --- Custom Styles for Components --- */
+        .text-pink {
+            color: var(--brand-pink) !important;
+        }
+
+        .text-pink-dark {
+            color: var(--brand-pink-dark) !important;
+        }
+
+        .text-purple-dark {
+            color: var(--brand-purple) !important;
+        }
+
+        .btn-pink {
+            background-color: var(--brand-pink);
+            color: white;
+            border-color: var(--brand-pink);
+        }
+
+        .btn-pink:hover {
+            background-color: var(--brand-pink-dark);
+            border-color: var(--brand-pink-dark);
+            color: white;
+        }
+
+        .btn-outline-pink {
+            color: var(--brand-pink);
+            border-color: var(--brand-pink);
+        }
+
+        .btn-outline-pink:hover {
+            background-color: var(--brand-pink);
+            color: white;
+        }
+
+        .bg-pink-light {
+            background-color: var(--brand-pink-light);
+        }
+
+        /* Hover vào .nav-item.dropdown thì hiện menu */
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-item :hover {
+            color: var(--brand-pink);
+            font-weight: 600;
+            background-color: white;
+        }
+
+        /* Nút bấm */
+        .btn-flo-primary {
+            background-color: var(--flo-pink);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .btn-flo-primary:hover {
+            background-color: #d83168;
+            color: white;
+        }
+
+        /* Breadcrumb (Đường dẫn trang) */
+        .breadcrumb {
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-item a {
+            text-decoration: none;
+            color: var(--flo-text-secondary);
+        }
+
+        .breadcrumb-item.active {
+            color: var(--flo-text-dark);
+        }
+
+        /* Phần giới thiệu (Hero Section) */
+        .hero-section {
+            background-color: var(--flo-light-purple);
+            line-height: 28.8px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--flo-text-dark);
+        }
+
+        .hero-text {
+            color: var(--flo-text-secondary);
+        }
+
+        /* Khung máy tính */
+        .calculator-card {
+            background-color: white;
+            border: 1px solid var(--flo-border-color);
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .text-muted {
+            width: 60%;
+            line-height: 28.8px;
+        }
+
+        .form-label {
+            color: var(--flo-text-dark);
+        }
+
+        .form-control {
+            border: 1px solid var(--flo-border-color);
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(233, 64, 121, 0.25);
+            border-color: var(--flo-pink);
+        }
+
+        /* Ô nhập liệu với nút +/- */
+        .input-group .form-control {
+            border-left: none;
+            border-right: none;
+        }
+
+        .input-group .btn {
+            border-color: var(--flo-border-color);
+            background-color: white;
+        }
+
+        .input-group .btn:hover {
+            background-color: #f1f1f1;
+        }
+
+        .input-group .btn-minus {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .input-group .btn-plus {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        /* Khu vực hiển thị kết quả */
+        #results-area {
+
+            border: 1px solid var(--flo-border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            display: none;
+            /* Ẩn ban đầu */
+        }
+
+        #results-area h4 {
+            color: var(--flo-pink);
+            font-weight: 600;
+        }
+
+        /* Phần nội dung văn bản */
+        .content-section h3 {
+
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section {
+            background-color: var(--flo-light-purple);
+            padding: 1.5rem;
+            line-height: 28.8px;
+        }
+
+        /* Thanh bên (Sidebar) */
+        .sidebar-card {
+            border: 1px solid var(--flo-border-color);
+            background-color: white;
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--flo-text-secondary);
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--flo-border-color);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 0.5rem 0;
+            text-decoration: none;
+            color: var(--flo-text-dark);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .sidebar-link:hover {
+            color: var(--flo-pink);
+        }
+
+        /* Footer */
+        .footer-brand {
+            color: var(--brand-pink);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header - Thanh điều hướng -->
+    <header>
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <svg class="text-pink me-2" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                        </path>
+                    </svg>
+                    <span class="fs-4 fw-bold text-pink-dark">LadyHeath</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="caculator.html" id="navbarDropdown" role="button"
+                                aria-expanded="false">
+                                Công cụ tính toán
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="menstrual.html">Tính ngày kinh nguyệt</a></li>
+                                <li><a class="dropdown-item" href="ovulation.html">Tính ngày rụng trứng</a></li>
+                                <li><a class="dropdown-item" href="pregnancy_due_date.html">Tính ngày dự sinh</a></li>
+                                <li><a class="dropdown-item" href="pregnancy_test.html">Tính ngày thử thai</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#articles">Sức khỏe A-Z</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#experts">Chuyên gia</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#faq">Hỏi & Đáp</a></li>
+                    </ul>
+                    <form class="d-flex me-lg-2 mb-2 mb-lg-0" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+                    </form>
+                    <div class="d-flex align-items-center">
+                        <a href="login_signup.html" class="btn btn-sm btn-outline-secondary me-2">Đăng nhập</a>
+                        <a href="login_signup.html" class="btn btn-sm btn-pink">Đăng ký</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Nội dung chính -->
+    <main class="container my-4">
+        <!-- Breadcrumbs - Đường dẫn trang -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Thư viện sức khỏe</a></li>
+                <li class="breadcrumb-item"><a href="#">Công cụ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Máy tính ngày dự sinh</li>
+            </ol>
+        </nav>
+
+        <div class="row g-4">
+            <!-- Cột trái: Máy tính và nội dung -->
+            <div class="col-lg-12">
+                <!-- Phần giới thiệu -->
+                <section class="hero-section p-4 rounded-3 d-flex align-items-center">
+                    <div class="row align-items-center">
+                        <div class="col-md-7">
+                            <h1 class="hero-title">Máy tính ngày dự sinh</h1>
+                            <p class="hero-text">Kết quả xét nghiệm thai dương tính sau khi trễ kinh ? Bạn có thể có rất
+                                nhiều câu hỏi, chẳng hạn như tôi đã mang thai được bao lâu rồi? Và ngày dự sinh của tôi
+                                là khi nào? Công cụ tính ngày dự sinh của chúng tôi có thể giúp bạn tính toán ngày dự
+                                sinh hoặc thời điểm em bé chào đời.</p>
+                        </div>
+                        <div class="col-md-5 text-center">
+                            <!-- Hình minh họa -->
+                            <img src="img/tools/it8.avif" alt="Hình minh họa chu kỳ kinh nguyệt" class="img-fluid">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Form máy tính -->
+                <section class="calculator-card p-4 rounded-3 mt-3 shadow-sm">
+                    <div class="text-muted small mb-3">
+                        <p class="mb-1">Cập nhật ngày 18 tháng 12 năm 2024</p>
+                        <p class="mb-1">Được đánh giá về mặt y khoa bởi <strong>Tiến sĩ Charlsie Celestine</strong>, Bác
+                            sĩ sản phụ khoa, Georgia, Hoa Kỳ</p>
+                        <p>Được viết bởi <strong>Natalia Hedly</strong></p>
+
+
+                        <form id="cycle-form">
+                            <div class="mb-3">
+                                <label for="last-period-date" class="form-label fw-medium">Ngày đầu tiên của kỳ kinh
+                                    cuối cùng của bạn</label>
+                                <input type="text" class="form-control" id="last-period-date" placeholder="Chọn ngày">
+                            </div>
+
+                            <button type="button" id="calculate-btn"
+                                class="btn btn-flo-primary w-100 mt-3 py-2 fw-bold">Xem kết quả</button>
+                            <!-- Khu vực hiển thị kết quả -->
+                            <div id="results-area" class="mt-4"></div>
+                        </form>
+
+                    </div>
+
+                    <!-- Cột phải: Thanh bên -->
+                    <div class="col-lg-4">
+                        <aside class="sidebar">
+                            <div class="sidebar-card p-4 rounded-3 shadow-sm">
+                                <h5 class="sidebar-title">TRONG BÀI VIẾT NÀY</h5>
+                                <ul class="list-unstyled">
+                                    <li><a href="#ovulation-calculator" class="sidebar-link">Những điểm chính cần lưu ý
+                                            khi sử dụng máy tính ngày dự sinh</a></li>
+                                    <li><a href="#" class="sidebar-link">Ngày dự sinh của tôi được tính như thế nào?
+                                        </a></li>
+                                    <li><a href="#" class="sidebar-link">Nhìn thoáng qua, tôi dự sinh vào tháng nào?
+                                        </a></li>
+                                    <li><a href="#faq" class="sidebar-link">Câu hỏi thường gặp</a></li>
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+            </div>
+            </section>
+            <!-- Nội dung thông tin -->
+        </div>
+        <section class="content-section mt-3 rounded-3">
+            <h3>Những điểm chính cần lưu ý khi sử dụng máy tính ngày dự sinh</h3>
+            <p>Có rất nhiều cách khác nhau để bạn tính ngày dự sinh. Thông thường, bạn cần biết ngày đầu tiên của kỳ
+                kinh cuối (LMP) hoặc ngày chuyển phôi IVF . Hầu hết các thai kỳ kéo dài khoảng 40 tuần tính từ ngày cuối
+                cùng của kỳ kinh. Tuy nhiên, thời gian này có thể khác nhau. Hãy đọc tiếp để tìm hiểu thêm. </p>
+            <p>Bạn có thể cảm thấy thật sự phấn khích khi nghĩ đến ngày được gặp con mình, nhưng ngày dự sinh chỉ là ước
+                tính và ngày sinh có thể diễn ra trước hoặc sau đó vài tuần . </p>
+
+            <h3>Ngày dự sinh của tôi được tính như thế nào? </h3>
+            <p>MVậy, trước hết, máy tính ngày dự sinh hoạt động như thế nào và bác sĩ sẽ ước tính ngày dự sinh của bạn
+                như thế nào? Tiến sĩ Sara Twogood , bác sĩ sản phụ khoa tại Cedars-Sinai Medical Group, California, Hoa
+                Kỳ, giải thích rằng có một vài cách khác nhau để bạn có thể tính toán ngày dự sinh. </p>
+            <p>Nhiều bác sĩ sẽ sử dụng dữ liệu chu kỳ kinh nguyệt của bạn, vì vậy việc sử dụng ứng dụng theo dõi chu kỳ
+                kinh nguyệt như Flo có thể giúp bạn trong các cuộc hẹn. Bạn sẽ có ngay trong túi mình ngày của kỳ kinh
+                cuối cùng cùng với bất kỳ triệu chứng nào bạn gặp phải trước khi mang thai. </p>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container text-center text-md-start">
+            <div class="row text-center text-md-start">
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold footer-brand">LadyHeath</h5>
+                    <p>Hướng dẫn được cá nhân hóa của bạn về sức khỏe, cung cấp theo dõi chu kỳ, thông tin sức khỏe từ
+                        chuyên gia và một cộng đồng hỗ trợ.</p>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold">Tính năng</h5>
+                    <p><a href="#cycle-calculator" class="text-white text-decoration-none">Theo dõi chu kỳ</a></p>
+                    <p><a href="#articles" class="text-white text-decoration-none">Sức khỏe A-Z</a></p>
+                    <p><a href="#experts" class="text-white text-decoration-none">Chuyên gia</a></p>
+                    <p><a href="#faq" class="text-white text-decoration-none">Hỏi & Đáp</a></p>
+                </div>
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold">Pháp lý</h5>
+                    <p><a href="#" class="text-white text-decoration-none">Chính sách bảo mật</a></p>
+                    <p><a href="#" class="text-white text-decoration-none">Điều khoản dịch vụ</a></p>
+                    <p><a href="#" class="text-white text-decoration-none">Tuyên bố miễn trừ trách nhiệm</a></p>
+                </div>
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 fw-bold">Bản tin</h5>
+                    <p>Đăng ký nhận bản tin của chúng tôi để nhận các mẹo sức khỏe mới nhất.</p>
+                    <form class="d-flex">
+                        <input type="email" class="form-control form-control-sm me-2" placeholder="Email của bạn">
+                        <button class="btn btn-sm btn-pink">Đăng ký</button>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p>&copy; 2024 LadyHeath. Bảo lưu mọi quyền.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Flatpickr JS (Thư viện chọn ngày) -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/vn.js"></script> <!-- Ngôn ngữ tiếng Việt cho Flatpickr -->
+
+    <!-- JavaScript Tùy chỉnh -->
+    <!-- JavaScript Tùy chỉnh -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const datePicker = flatpickr("#last-period-date", {
+                dateFormat: "j F, Y",
+                defaultDate: "today",
+                locale: "vn"
+            });
+
+            const calculateBtn = document.getElementById('calculate-btn');
+            const resultsArea = document.getElementById('results-area');
+
+            calculateBtn.addEventListener('click', function () {
+                const lastPeriodDate = datePicker.selectedDates[0];
+
+                if (!lastPeriodDate) {
+                    showModal("Vui lòng chọn ngày đầu tiên của kỳ kinh cuối.");
+                    return;
+                }
+
+                // --- Logic tính toán ngày dự sinh ---
+                // Thêm 280 ngày (40 tuần) vào ngày kinh cuối
+                const dueDate = new Date(lastPeriodDate);
+                dueDate.setDate(dueDate.getDate() + 280);
+
+                // Tính tuổi thai hiện tại
+                const today = new Date();
+                // Đảm bảo không tính tuổi thai cho ngày trong tương lai
+                if (today < lastPeriodDate) {
+                    showModal("Ngày kinh cuối không thể ở trong tương lai.");
+                    return;
+                }
+
+                const timeDiff = today.getTime() - lastPeriodDate.getTime();
+                const daysPregnant = Math.floor(timeDiff / (1000 * 3600 * 24));
+                const weeks = Math.floor(daysPregnant / 7);
+                const days = daysPregnant % 7;
+
+                let gestationalAge = `Bạn đã mang thai khoảng ${weeks} tuần và ${days} ngày.`;
+                if (daysPregnant < 0) {
+                    gestationalAge = "Vui lòng chọn một ngày trong quá khứ.";
+                }
+
+
+                // --- Hiển thị kết quả ---
+                resultsArea.style.display = 'block';
+                resultsArea.innerHTML = `
+                    <h4 class="mb-3">Kết quả của bạn</h4>
+                    <div class="row text-start">
+                        <div class="col-md-6 mb-3">
+                            <p class="mb-1"><strong>Ngày dự sinh của bạn là:</strong></p>
+                            <p class="fs-4 fw-bold" style="color: var(--brand-purple);">${formatDate(dueDate)}</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p class="mb-1"><strong>Tuổi thai hiện tại:</strong></p>
+                            <p class="fs-4 fw-bold" style="color: var(--brand-pink);">${gestationalAge}</p>
+                        </div>
+                    </div>
+                    <p class="small mt-4">*Ngày dự sinh chỉ là ước tính. Em bé của bạn có thể chào đời sớm hơn hoặc muộn hơn.</p>
+                `;
+            });
+
+            function formatDate(date) {
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                return date.toLocaleDateString('vi-VN', options);
+            }
+
+            function showModal(message) {
+                const existingModal = document.getElementById('custom-alert-modal');
+                if (existingModal) { existingModal.remove(); }
+                const modal = document.createElement('div');
+                modal.id = 'custom-alert-modal';
+                modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1050;';
+                modal.innerHTML = `
+                    <div style="background: white; padding: 20px 30px; border-radius: 8px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin: 0 0 15px 0; font-size: 1.1rem;">${message}</p>
+                        <button id="modal-close-btn" class="btn btn-pink">Đã hiểu</button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                document.getElementById('modal-close-btn').addEventListener('click', () => {
+                    modal.remove();
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

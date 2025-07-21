@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập & Đăng ký</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS Variables cho màu sắc */
+        :root {
+            --pink-primary: #e91e63; /* Màu hồng đậm cho nút và điểm nhấn */
+            --pink-light: #fce4ec;   /* Màu hồng rất nhạt cho nền */
+            --pink-gradient: linear-gradient(135deg, #fff0f5, #ffe4e1); /* Gradient nền */
+            --text-dark: #333;
+            --text-light: #666;
+            --border-color: #e0e0e0;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--pink-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-dark);
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 520px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            background-color: var(--pink-primary);
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .form-wrapper {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Ẩn form không hoạt động */
+        .form-section.hidden {
+            display: none;
+        }
+
+        .form-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--pink-primary);
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.15);
+        }
+        
+        /* Select dropdown styling */
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 16px 12px;
+        }
+
+        .form-group.inline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .forgot-link {
+            font-size: 0.85rem;
+            color: var(--pink-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--pink-primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #c2185b; /* Màu hồng đậm hơn khi hover */
+        }
+        
+        .divider {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+        .divider::before { margin-right: 10px; }
+        .divider::after { margin-left: 10px; }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .social-btn:hover {
+            background-color: #f5f5f5;
+            border-color: #ccc;
+        }
+
+        .toggle-auth {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .toggle-auth a {
+            color: var(--pink-primary);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .toggle-auth a:hover {
+            text-decoration: underline;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .checkbox-group label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+        .checkbox-group a {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .fa-heart-pulse{
+            color:white
+        }
+    </style>
+</head>
+<body>
+
+    <main class="auth-container">
+        <!-- Header chung -->
+        <header class="header">
+            <div class="logo"><a href="index.html"><i class="fa-solid fa-heart-pulse"></i></a></div>
+            <h1>Chào mừng tới LadyHealth</h1>
+            <p>Đối tác tin cậy cho sức khỏe và hạnh phúc của bạn</p>
+        </header>
+
+        
+
+        <!-- Khung chứa form -->
+        <div class="form-wrapper">
+
+            <!-- Form Đăng nhập (Mặc định hiển thị) -->
+            <section id="login-form" class="form-section">
+                <h2>Đăng nhập</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="login-email">Địa chỉ Email</label>
+                        <input type="email" id="login-email" class="form-control" placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <div class="inline">
+                           <label for="login-password">Mật khẩu</label>
+                           <a href="#" class="forgot-link">Quên?</a>
+                        </div>
+                        <input type="password" id="login-password" class="form-control" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-primary">Đăng nhập</button>
+                </form>
+
+                <div class="divider">Hoặc tiếp tục với</div>
+
+                <div class="social-login">
+                    <a href="#" class="social-btn"><i class="fab fa-google"></i></a>
+                    <a href="#" class="social-btn"><i class="fab fa-apple"></i></a>
+                    <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+                </div>
+
+                <p class="toggle-auth">
+                    Chưa có tài khoản? <a id="show-signup">Đăng ký</a>
+                </p>
+            </section>
+
+            <!-- Form Đăng ký (Mặc định ẩn) -->
+            <section id="signup-form" class="form-section hidden">
+                <h2>Tạo tài khoản</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="role">Tôi là...</label>
+                        <select id="role" class="form-control">
+                            <option>Phụ nữ tìm kiếm thông tin sức khỏe</option>
+                            <option>Chuyên gia y tế</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname">Họ và Tên</label>
+                        <input type="text" id="fullname" class="form-control" placeholder="Jane Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Địa chỉ Email</label>
+                        <input type="email" id="signup-email" class="form-control" placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Mật khẩu</label>
+                        <input type="password" id="signup-password" class="form-control" placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Xác nhận mật khẩu</label>
+                        <input type="password" id="confirm-password" class="form-control" placeholder="••••••••">
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">Tôi đồng ý với <a href="#">Điều khoản Dịch vụ</a> và <a href="#">Chính sách Bảo mật</a>.</label>
+                    </div>
+                    <button type="submit" class="btn-primary">Tạo tài khoản</button>
+                </form>
+                <p class="toggle-auth">
+                    Đã có tài khoản? <a id="show-login">Đăng nhập</a>
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const showSignupBtn = document.getElementById('show-signup');
+            const showLoginBtn = document.getElementById('show-login');
+
+            // Chuyển sang form Đăng ký
+            showSignupBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+            });
+
+            // Chuyển sang form Đăng nhập
+            showLoginBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                signupForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>

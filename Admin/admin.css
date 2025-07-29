@@ -1,0 +1,618 @@
+:root {
+    --sidebar-bg: #2d3748;
+    --sidebar-text: #a0aec0;
+    --sidebar-text-hover: #ffffff;
+    --main-bg: #f7fafc;
+    --primary-color: #8a4d76;
+    --primary-color-dark: #6d3a5a;
+    --border-color: #e2e8f0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    
+}
+
+.admin-container {
+    display: flex;
+    background-color: var(--main-bg);
+    color: #2d3748;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid #4a5568;
+}
+
+.logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    color: var(--sidebar-text);
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav .nav-item.active a {
+    background-color: #4a5568;
+    color: var(--sidebar-text-hover);
+}
+
+.sidebar-nav .nav-item.has-submenu .submenu {
+    padding-left: 1.5rem;
+    display: none;
+}
+
+/* Thêm quy tắc này để hiển thị menu con khi li cha có class 'open' */
+.sidebar-nav .nav-item.has-submenu.open .submenu {
+    display: block;
+}
+
+.sidebar-nav i {
+    margin-right: 0.75rem;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 1.5rem;
+    border-top: 1px solid #4a5568;
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+}
+
+.main-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: white;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.user-avatar {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.page-content {
+    padding: 2rem;
+}
+
+/* Page Header */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.75rem;
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-color-dark);
+}
+
+/* Table styles */
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.content-table th,
+.content-table td {
+    padding: 1rem;
+    text-align: left;
+}
+
+.content-table thead {
+    background-color: #f1f5f9;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.content-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.status-tag {
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-published {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-draft {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.action-icons a {
+    color: #64748b;
+    margin: 0 0.5rem;
+    text-decoration: none;
+}
+
+.action-icons a:hover {
+    color: var(--primary-color);
+}
+.sidebar a {
+    color: var(--sidebar-text);
+    text-decoration: none;
+}
+/*------------------------------------------------index.html------------------------------------------------
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.stat-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: white;
+    font-size: 1.25rem;
+}
+
+.icon-blue { background-color: #3b82f6; }
+.icon-green { background-color: #22c55e; }
+.icon-purple { background-color: #8b5cf6; }
+.icon-yellow { background-color: #f59e0b; }
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-title {
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
+/* Chart Container */
+.chart-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    height: 400px; /* Set a fixed height for the chart */
+}
+
+.chart-title {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+/* Quick Actions */
+.actions-title {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.action-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #475569;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    color: var(--primary-color);
+}
+
+.action-card i {
+    font-size: 1.25rem;
+    margin-right: 1rem;
+    color: var(--primary-color);
+}
+
+/*------------------------------------------------users.html------------------------------------------------*/
+/* Table Controls */
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+.search-box input {
+    padding: 0.6rem 1rem 0.6rem 2.5rem; /* Padding left for icon */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    width: 300px;
+    font-size: 0.9rem;
+}
+
+/* Role Tags */
+.role-tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+
+/* Giữ nguyên cho Admin */
+.role-admin {
+    background-color: #fee2e2;
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+/* Đổi tên class và giữ màu xanh cho Chuyên gia */
+.role-expert {
+    background-color: #dbeafe;
+    color: #2563eb;
+    border-color: #bfdbfe;
+}
+
+/* Đổi tên class và giữ màu xám cho Người dùng */
+.role-member {
+    background-color: #e2e8f0;
+    color: #475569;
+    border-color: #cbd5e1;
+}
+
+/*------------------------------------------------tools.html------------------------------------------------*/
+/* Content Management Card */
+.content-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.content-card-title {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #475569;
+}
+
+/* Styling for textarea to look like a rich text editor */
+.form-control-editor {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #4a5568; /* Dark background */
+    color: #f7fafc; /* Light text */
+    resize: vertical; /* Allow vertical resize */
+}
+
+.form-control-editor:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(138, 77, 118, 0.2);
+}
+
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+/*---------------------------------------------------experts.html-----------------------------------------*/
+/* --- Trang Chuyên gia --- */
+.experts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.expert-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.expert-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid #fce4ec;
+}
+
+.expert-info {
+    flex-grow: 1;
+}
+
+.expert-name {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.expert-specialty {
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.expert-desc {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.expert-actions {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.expert-actions a {
+    color: #94a3b8;
+    margin: 0 0.75rem;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.expert-actions a:hover {
+    color: var(--primary-color);
+}
+/* --- CSS CHO MODAL (Thêm vào cuối file) --- */
+
+/* Lớp nền đen mờ bao phủ toàn bộ trang */
+.modal-overlay {
+    position: fixed; /* Giữ cố định trên màn hình */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Luôn nằm trên cùng */
+    
+    /* Mặc định ẩn modal đi */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Khi có class 'active', modal sẽ hiện ra */
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Khung nội dung của modal */
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.modal-header .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+.modal-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.modal-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.modal-form input,
+.modal-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.modal-form input:focus,
+.modal-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(194, 24, 91, 0.2);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-secondary {
+    background-color: #e2e8f0;
+    color: var(--text-dark);
+}
+/* Gộp chung style cho input và select để chúng giống nhau */
+.modal-form input,
+.modal-form select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: white; /* Đảm bảo nền trắng */
+}
+
+/* Style riêng cho ô chọn Vai trò */
+.modal-form select {
+    /* Xóa giao diện mặc định của trình duyệt */
+    appearance: none;
+    -webkit-appearance: none;
+
+    /* Thêm icon mũi tên tùy chỉnh bằng SVG */
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="%2364748b"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1em;
+
+    /* Thêm khoảng trống bên phải để chữ không đè lên mũi tên */
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+/* Đảm bảo hiệu ứng focus nhất quán */
+.modal-form input:focus,
+.modal-form select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(138, 77, 118, 0.2);
+}

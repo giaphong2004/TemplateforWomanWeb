@@ -1,0 +1,109 @@
+<div class="page-header">
+    <h1>Trang tổng quan</h1>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon-wrapper icon-blue">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+            <span class="stat-title">Tổng số người dùng</span>
+            <span class="stat-value">1,250</span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon-wrapper icon-green">
+            <i class="fas fa-user-plus"></i>
+        </div>
+        <div class="stat-info">
+            <span class="stat-title">Người dùng mới (Tháng)</span>
+            <span class="stat-value">76</span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon-wrapper icon-purple">
+            <i class="fas fa-file-alt"></i>
+        </div>
+        <div class="stat-info">
+            <span class="stat-title">Tổng số bài viết</span>
+            <span class="stat-value">89</span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon-wrapper icon-yellow">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="stat-info">
+            <span class="stat-title">Câu hỏi chờ duyệt</span>
+            <span class="stat-value">12</span>
+        </div>
+    </div>
+</div>
+
+<div class="chart-container">
+    <h5 class="chart-title">Người dùng đăng ký (30 ngày qua)</h5>
+    <canvas id="usersChart"></canvas>
+</div>
+
+<div class="quick-actions">
+    <h5 class="actions-title">Lối tắt</h5>
+    <div class="actions-grid">
+        <a href="#" class="action-card">
+            <i class="fas fa-plus-circle"></i>
+            <span>Viết bài mới</span>
+        </a>
+        <a href="#" class="action-card">
+            <i class="fas fa-plus-circle"></i>
+            <span>Thêm chuyên gia</span>
+        </a>
+        <a href="#" class="action-card">
+            <i class="fas fa-users-cog"></i>
+            <span>Quản lý người dùng</span>
+        </a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Sample data for the chart
+    const labels = ["19-06", "21-06", "23-06", "25-06", "27-06", "29-06", "01-07", "03-07", "05-07", "07-07", "09-07", "11-07", "13-07", "15-07", "17-07", "19-07", "21-07", "23-07", "25-07", "27-07"];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Người dùng mới',
+            backgroundColor: 'rgba(138, 77, 118, 0.1)',
+            borderColor: 'rgba(138, 77, 118, 1)',
+            data: [18, 12, 16, 22, 19, 23, 22, 21, 8, 12, 14, 18, 15, 14, 16, 18, 15, 10, 16, 21],
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: 'rgba(138, 77, 118, 1)',
+            pointRadius: 4,
+        }]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false // Hide the legend
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    // Render the chart
+    const usersChart = new Chart(
+        document.getElementById('usersChart'),
+        config
+    );
+</script>

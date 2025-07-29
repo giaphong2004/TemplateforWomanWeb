@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Quản Trị - LadyHeath</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="logo">LadyHeath</a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="index.html"><i class="fas fa-tachometer-alt"></i> Tổng quan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="users.html"><i class="fas fa-users"></i> Người dùng</a>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <a href="#"><i class="fas fa-file-alt"></i> Nội dung</a>
+                        <ul class="submenu">
+                            <li><a href="posts.html">Sức khỏe A-Z</a></li>
+                            <li><a href="experts.html">Chuyên gia</a></li>
+                            <li><a href="#">Công cụ</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="tools.html"><i class="fa-solid fa-wrench"></i>Công cụ</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-welcome">
+                    <span>Chào mừng, <strong>Admin</strong></span>
+                </div>
+                <div class="header-user">
+                    <i class="fas fa-user-circle user-avatar"></i>
+                </div>
+            </header>
+
+            <div class="page-content" id="page-content">
+            </div>
+        </main>
+    </div>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('.sidebar-nav a');
+            const pageContent = document.getElementById('page-content');
+
+            /**
+         * HÀM TÁI SỬ DỤNG ĐỂ THIẾT LẬP SỰ KIỆN CHO BẤT KỲ MODAL NÀO
+         * @param {string} triggerSelector - ID của nút bấm để mở modal (ví dụ: '#add-expert-btn')
+         * @param {string} modalSelector - ID của modal để hiển thị (ví dụ: '#add-expert-modal')
+         */
+            const setupModalEvents = (triggerSelector, modalSelector) => {
+                const triggerButton = pageContent.querySelector(triggerSelector);
+                const modal = pageContent.querySelector(modalSelector);
+
+                if (!triggerButton || !modal) return; // Dừng lại nếu không tìm thấy nút hoặc modal
+
+                const closeModalBtn = modal.querySelector('.close-btn');
+                const cancelBtn = modal.querySelector('.cancel-btn');
+
+                const openModal = (e) => {
+                    e.preventDefault(); // Ngăn link '#' nhảy trang
+                    modal.classList.add('active');
+                }
+                const closeModal = () => modal.classList.remove('active');
+
+                // Gán sự kiện cho các nút
+                triggerButton.addEventListener('click', openModal);
+                if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+                if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+                // Đóng modal khi click ra ngoài
+                modal.addEventListener('click', (event) => {
+                    if (event.target === modal) closeModal();
+                });
+            };
+
+            const initDashboardChart = () => {
+                const canvas = pageContent.querySelector('#usersChart');
+                if (!canvas) return;
+                const labels = ["19-06", "21-06", "23-06", "25-06", "27-06", "29-06", "01-07", "03-07", "05-07", "07-07", "09-07", "11-07", "13-07", "15-07", "17-07", "19-07", "21-07", "23-07", "25-07", "27-07"];
+                const data = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Người dùng mới',
+                        backgroundColor: 'rgba(138, 77, 118, 0.1)',
+                        borderColor: 'rgba(138, 77, 118, 1)',
+                        data: [18, 12, 16, 22, 19, 23, 22, 21, 8, 12, 14, 18, 15, 14, 16, 18, 15, 10, 16, 21],
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: 'rgba(138, 77, 118, 1)',
+                        pointRadius: 4,
+                    }]
+                };
+                const config = { type: 'line', data: data, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } } };
+                new Chart(canvas, config);
+            };
+
+            const loadContent = (url) => {
+                fetch(url)
+                    .then(response => response.text())
+                    .then(html => {
+                        pageContent.innerHTML = html;
+
+                        if (url.includes('index.html')) {
+                            initDashboardChart();
+                        } else if (url.includes('experts.html')) {
+                            // Thiết lập modal cho trang chuyên gia
+                            setupModalEvents('#add-expert-btn', '#add-expert-modal');
+                        } else if (url.includes('users.html')) {
+                            // 👇 BỔ SUNG: Thiết lập modal cho trang người dùng 👇
+                            setupModalEvents('#add-user-btn', '#add-user-modal');
+                        }
+                    })
+                    .catch(err => console.error('Failed to load page: ', err));
+            };
+
+
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const parentLi = link.parentElement;
+
+                    if (parentLi.classList.contains('has-submenu')) {
+                        parentLi.classList.toggle('open');
+                    } else {
+                        const url = link.getAttribute('href');
+                        if (url && url !== '#') {
+                            loadContent(url);
+                            links.forEach(l => l.parentElement.classList.remove('active'));
+                            parentLi.classList.add('active');
+                        }
+                    }
+                });
+            });
+
+            loadContent('index.html');
+        });
+    </script>
+</body>
+
+</html>

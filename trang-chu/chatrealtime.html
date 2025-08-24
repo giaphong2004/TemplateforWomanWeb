@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao diện Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="messenger-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>Đoạn chat</h1>
+                <div class="menu-icon">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </div>
+            <div class="sidebar-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Tìm kiếm trên Messenger">
+            </div>
+            <ul class="chat-list">
+                <li class="chat-item">
+                    <img src="https://i.pravatar.cc/150?u=phonluon" alt="Avatar">
+                    <div class="chat-details">
+                        <div class="chat-name">Phồn lươn</div>
+                        <div class="chat-message">bão sao e · 14 phút</div>
+                    </div>
+                </li>
+                <li class="chat-item active">
+                    <img src="https://i.pravatar.cc/150?u=rinhỏ" alt="Avatar">
+                    <div class="chat-details">
+                        <div class="chat-name">Ri nhỏ</div>
+                        <div class="chat-message">Bạn: Tự u cơ lốc... · 37 phút</div>
+                    </div>
+                    <div class="unread-dot"></div>
+                </li>
+                <li class="chat-item">
+                    <img src="https://i.pravatar.cc/150?u=kiet" alt="Avatar">
+                    <div class="chat-details">
+                        <div class="chat-name">Kiệt Nguyễn</div>
+                        <div class="chat-message">Bạn: off · 42 phút</div>
+                    </div>
+                    <div class="unread-dot"></div>
+                </li>
+                <li class="chat-item">
+                    <img src="https://i.pravatar.cc/150?u=vanan" alt="Avatar">
+                    <div class="chat-details">
+                        <div class="chat-name">Vân An</div>
+                        <div class="chat-message">Bạn: Ngủ · 1 giờ</div>
+                    </div>
+                    <div class="unread-dot"></div>
+                </li>
+                <li class="chat-item">
+                    <img src="https://i.pravatar.cc/150?u=gia" alt="Avatar">
+                    <div class="chat-details">
+                        <div class="chat-name">Gia Nguyễn</div>
+                        <div class="chat-message">Bạn: . · 1 giờ</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="chat-window">
+            <div class="chat-header">
+                <div class="contact-info">
+                    <img src="https://i.pravatar.cc/150?u=rinhỏ" alt="Avatar">
+                    <div class="contact-details">
+                        <div class="contact-name">Ri nhỏ</div>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <i class="fa-solid fa-phone"></i>
+                    <i class="fa-solid fa-video"></i>
+                    <i class="fa-solid fa-circle-info"></i>
+                </div>
+            </div>
+
+            <div class="message-area">
+                <div class="message-group received">
+                    <img src="https://i.pravatar.cc/150?u=rinhỏ" alt="Avatar">
+                    <div class="message-bubbles">
+                        <div class="message-bubble">
+                            <p>Ừm kh biết</p>
+                        </div>
+                        <div class="message-bubble">
+                            <p>Kh rảnh công nghệ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="input-actions">
+                    <i class="fa-solid fa-circle-plus"></i>
+                    <i class="fa-solid fa-image"></i>
+                    <i class="fa-solid fa-note-sticky"></i>
+                    <i class="fa-solid fa-gift"></i>
+                </div>
+                <div class="message-input">
+                    <input type="text" placeholder="Aa">
+                    <i class="fa-solid fa-face-smile"></i>
+                </div>
+                <div class="send-action">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

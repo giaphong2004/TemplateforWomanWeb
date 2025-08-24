@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cập nhật Hồ sơ Chuyên gia - LadyHeath</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-pink: #e91e63;
+            --brand-pink-dark: #c2185b;
+            --brand-pink-light: #fce4ec;
+            --text-dark: #343a40;
+            --text-muted: #6c757d;
+            --border-color: #dee2e6;
+            --body-bg: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--body-bg);
+        }
+
+        /* --- General Styles --- */
+        .btn-pink {
+            background-color: var(--brand-pink);
+            color: white;
+            border-color: var(--brand-pink);
+        }
+
+        .btn-pink:hover {
+            background-color: var(--brand-pink-dark);
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--text-dark);
+            border: none;
+        }
+
+        /* --- Page Layout --- */
+        .page-header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--white);
+        }
+
+        .page-title {
+            font-weight: 600;
+        }
+
+        .edit-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 992px) {
+            .edit-layout {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--brand-pink);
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.15);
+        }
+
+        /* Avatar Upload */
+        .avatar-upload-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .avatar-preview img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        #avatar-input {
+            display: none;
+        }
+
+        .btn-upload {
+            font-weight: 500;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <div class="container d-flex justify-content-between align-items-center">
+                <h1 class="page-title mb-0">Chỉnh sửa Hồ sơ Chuyên gia</h1>
+                <div>
+                    <a href="#" class="btn btn-secondary">Xem hồ sơ</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-4">
+            <form class="edit-layout">
+
+                <div class="main-column">
+                    <div class="card">
+                        <h4 class="card-title">Thông tin chuyên môn</h4>
+
+                        <div class="form-group">
+                            <label for="expert-title">Chức danh</label>
+                            <input type="text" id="expert-title" class="form-control"
+                                value="Trưởng khoa sản Bệnh viện Từ Dũ">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="expert-bio">Tiểu sử</label>
+                            <textarea id="expert-bio" class="form-control"
+                                rows="8">Với hơn 15 năm kinh nghiệm trong lĩnh vực sản phụ khoa, Bác sĩ Trần Thị B đã cống hiến sự nghiệp của mình cho việc chăm sóc sức khỏe phụ nữ. Bà tốt nghiệp loại xuất sắc tại Đại học Y Dược TPHCM và đã hoàn thành nhiều khóa đào tạo chuyên sâu tại nước ngoài. Bác sĩ B nổi tiếng với sự tận tâm, chu đáo và khả năng chẩn đoán chính xác, giúp hàng ngàn sản phụ có một thai kỳ khỏe mạnh và an toàn.</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="expert-qualifications">Bằng cấp & Chuyên môn</label>
+                            <textarea id="expert-qualifications" class="form-control" rows="5"
+                                placeholder="Liệt kê các bằng cấp, chứng chỉ, mỗi mục một dòng..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-column">
+                    <div class="card">
+                        <h4 class="card-title">Thông tin cá nhân</h4>
+
+                        <div class="form-group">
+                            <label>Ảnh đại diện</label>
+                            <div class="avatar-upload-container">
+                                <div class="avatar-preview">
+                                    <img id="avatar-preview-img" src="https://i.pravatar.cc/150?img=1"
+                                        alt="Avatar Preview">
+                                </div>
+                                <label for="avatar-input" class="btn btn-sm btn-outline-dark btn-upload">
+                                    <i class="fas fa-camera me-2"></i>Tải ảnh mới
+                                </label>
+                                <input type="file" id="avatar-input" accept="image/*">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="full-name">Tên hiển thị</label>
+                            <input type="text" id="full-name" class="form-control" value="BS. Trần Thị B">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" value="tranthib@example.com" disabled>
+                            <small class="text-muted">Email không thể thay đổi.</small>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-pink btn-lg">Cập nhật hồ sơ</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white pt-5 pb-4 mt-5">
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Script nhỏ để hiển thị ảnh preview khi chọn file
+        const avatarInput = document.getElementById('avatar-input');
+        const avatarPreviewImg = document.getElementById('avatar-preview-img');
+
+        if (avatarInput && avatarPreviewImg) {
+            avatarInput.addEventListener('change', event => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        avatarPreviewImg.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LadyHealth: Trung tâm sức khỏe phụ nữ</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Flatpickr CSS (Thư viện chọn ngày) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --brand-pink: #e91e63;
+            --brand-pink-dark: #c2185b;
+            --brand-pink-light: #fce4ec;
+            --brand-purple: #9c27b0;
+            --brand-purple-light: #f3e5f5;
+            --text-dark: #343a40;
+            --text-muted: #6c757d;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* --- Custom Styles for Components --- */
+        .text-pink {
+            color: var(--brand-pink) !important;
+        }
+
+        .text-pink-dark {
+            color: var(--brand-pink-dark) !important;
+        }
+
+        .text-purple-dark {
+            color: var(--brand-purple) !important;
+        }
+
+        .btn-pink {
+            background-color: var(--brand-pink);
+            color: white;
+            border-color: var(--brand-pink);
+        }
+
+        .btn-pink:hover {
+            background-color: var(--brand-pink-dark);
+            border-color: var(--brand-pink-dark);
+            color: white;
+        }
+
+        .btn-outline-pink {
+            color: var(--brand-pink);
+            border-color: var(--brand-pink);
+        }
+
+        .btn-outline-pink:hover {
+            background-color: var(--brand-pink);
+            color: white;
+        }
+
+        .bg-pink-light {
+            background-color: var(--brand-pink-light);
+        }
+
+        /* Hover vào .nav-item.dropdown thì hiện menu */
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-item :hover {
+            color: var(--brand-pink);
+            font-weight: 600;
+            background-color: white;
+        }
+
+        /* Cycle Calculator Widget */
+        /* #calculator-form .form-control,
+        #calculator-form .btn {
+            height: 50px;
+        }
+
+        #results-area {
+            background-color: #fafafa;
+            border: 1px dashed #ddd;
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .result-item p {
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .result-item .result-date {
+            font-size: 1.5rem;
+            font-weight: 700;
+        } */
+
+        /* Category Cards */
+        /* .category-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1.5rem 1rem;
+        background-color: white;
+        border-radius: 1rem;
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 600;
+        height: 100%;
+        border: 1px solid #eee;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        color: var(--brand-pink);
+        }
+
+        /* Expert Cards */
+        /* .expert-card img {
+                width: 120px;
+                height: 120px;
+                object-fit: cover;
+                border: 4px solid white;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Accordion Styling */
+        /* .accordion-button:not(.collapsed) {
+                color: var(--brand-pink-dark);
+                background-color: var(--brand-pink-light);
+            }
+
+            .accordion-button:focus {
+                box-shadow: 0 0 0 0.25rem rgba(233, 30, 99, 0.25);
+            }
+
+            /* Footer */
+        /* .footer-brand {
+                color: var(--brand-pink);
+            } */
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <section class="bg-white">
+        <div class="container col-xxl-8 px-4 py-5">
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="img/side-bar.jpg" class="d-block mx-lg-auto img-fluid rounded-3 shadow-lg"
+                        alt="Người phụ nữ mỉm cười" loading="lazy">
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold lh-1 mb-3">
+                        <span class="text-pink-dark">Sức Khỏe Của Bạn,</span><br />
+                        <span class="text-secondary">Hành Trình Của Bạn.</span>
+                    </h1>
+                    <p class="lead">Nắm quyền kiểm soát sức khỏe của bạn với tính năng theo dõi chu kỳ được cá nhân hóa,
+                        lời
+                        khuyên sức khỏe từ chuyên gia và một cộng đồng hỗ trợ. Tất cả ở cùng một nơi.</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <a href="login_signup.html"><button type="button" class="btn btn-pink btn-lg px-4 me-md-2">Tạo
+                                tài khoản
+                                miễn phí</button></a>
+                        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Khám phá tính năng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cycle Calculator Section -->
+    <section id="cycle-calculator" class="py-5" style="background-color: var(--brand-purple-light);">
+        <div class="container">
+            <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5">
+                <div class="card-body">
+                    <h2 class="text-center fw-bold mb-4">Công cụ tính ngày dự sinh</h2>
+                    <p class="text-center text-muted mb-5">Nhập thông tin của bạn để dự đoán ngày dự sinh.</p>
+                    <form id="calculator-form">
+                        <div class="row g-4">
+                            <div class="col-md-12">
+                                <label for="last-period-date" class="form-label fw-bold">Ngày đầu tiên của kỳ kinh cuối
+                                    cùng?</label>
+                                <input type="text" class="form-control" id="last-period-date"
+                                    placeholder="Chọn một ngày...">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cycle-length" class="form-label fw-bold">Độ dài chu kỳ trung bình
+                                    (ngày)</label>
+                                <div class="input-group">
+                                    <button class="btn btn-outline-secondary btn-minus" type="button"
+                                        data-target="cycle-length">-</button>
+                                    <input type="text" class="form-control text-center" value="28" id="cycle-length"
+                                        readonly>
+                                    <button class="btn btn-outline-secondary btn-plus" type="button"
+                                        data-target="cycle-length">+</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="period-duration" class="form-label fw-bold">Kỳ kinh kéo dài bao lâu
+                                    (ngày)</label>
+                                <div class="input-group">
+                                    <button class="btn btn-outline-secondary btn-minus" type="button"
+                                        data-target="period-duration">-</button>
+                                    <input type="text" class="form-control text-center" value="5" id="period-duration"
+                                        readonly>
+                                    <button class="btn btn-outline-secondary btn-plus" type="button"
+                                        data-target="period-duration">+</button>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center mt-4">
+                                <button type="button" id="calculate-btn" class="btn btn-lg px-5"
+                                    style="background-color: var(--brand-purple); color: white;">Xem kết quả</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="results-area" class="mt-5" style="display: none;">
+                        <!-- Results will be injected here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Flatpickr JS (Date Picker) -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/vn.js"></script> <!-- Vietnamese for Flatpickr -->
+
+    <!-- Custom JS for Calculator -->
+    <script>
+        // document.addEventListener('DOMContentLoaded', function () {
+
+        // 1. Initialize Flatpickr Date Picker
+        const datePicker = flatpickr("#last-period-date", {
+            dateFormat: "j F, Y", // UPDATED: Changed date format
+            defaultDate: "today",
+            locale: "vn" // Use Vietnamese locale
+        });
+
+
+    </script>
+</body>
+
+</html>

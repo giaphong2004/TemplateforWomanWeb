@@ -1,0 +1,130 @@
+<div id="post-list-view">
+    <div class="page-header">
+        <h1>Quản lý Bài viết Sức khỏe</h1>
+
+    </div>
+
+    <div class="table-controls">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Tìm bài viết theo tiêu đề...">
+        </div>
+        <a href="#" id="add-post-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Viết bài mới</a>
+    </div>
+
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>TIÊU ĐỀ</th>
+                <th>TÁC GIẢ</th>
+                <th>TAGS</th>
+                <th>TRẠNG THÁI</th>
+                <th>NGÀY XUẤT BẢN</th>
+                <th>HÀNH ĐỘNG</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>10 Lợi ích của việc uống đủ nước mỗi ngày</td>
+                <td>Dr. An Nguyễn</td>
+                <td>
+                    <span class="tag tag-pink">dinh dưỡng</span>
+                </td>
+                <td><span class="status-tag status-published">Đã xuất bản</span></td>
+                <td>15/07/2024</td>
+                <td class="action-icons">
+                    <a href="#" class="edit-post-btn" title="Sửa"><i class="fas fa-edit"></i></a>
+                    <a href="#" title="Xóa"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Hiểu rõ hơn về chu kỳ kinh nguyệt của bạn</td>
+                <td>Chuyên gia Phụ khoa</td>
+                <td>
+                    <span class="tag tag-blue">chu kỳ của bạn</span>
+                </td>
+                <td><span class="status-tag status-published">Đã xuất bản</span></td>
+                <td>10/07/2024</td>
+                <td class="action-icons">
+                    <a href="#" class="edit-post-btn" title="Sửa"><i class="fas fa-edit"></i></a>
+                    <a href="#" title="Xóa"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td>5 mẹo chăm sóc sức khỏe toàn diện</td>
+                <td>Dr. An Nguyễn</td>
+                <td>
+                    <span class="tag tag-green">sức khỏe 360</span>
+                </td>
+                <td><span class="status-tag status-published">Đã xuất bản</span></td>
+                <td>05/07/2024</td>
+                <td class="action-icons">
+                    <a href="#" class="edit-post-btn" title="Sửa"><i class="fas fa-edit"></i></a>
+                    <a href="#" title="Xóa"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Dinh dưỡng quan trọng trong tam cá nguyệt thứ nhất</td>
+                <td>Chuyên gia Dinh dưỡng</td>
+                <td>
+                    <span class="tag tag-orange">đang mang thai</span>
+                    <span class="tag tag-orange">mang thai</span>
+                </td>
+                <td><span class="status-tag status-draft">Bản nháp</span></td>
+                <td>Chưa xuất bản</td>
+                <td class="action-icons">
+                    <a href="#" class="edit-post-btn" title="Sửa"><i class="fas fa-edit"></i></a>
+                    <a href="#" title="Xóa"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Chăm sóc bé sơ sinh trong tuần đầu tiên</td>
+                <td>Nữ hộ sinh Mai P.</td>
+                <td>
+                    <span class="tag tag-teal">làm mẹ</span>
+                </td>
+                <td><span class="status-tag status-published">Đã xuất bản</span></td>
+                <td>01/07/2024</td>
+                <td class="action-icons">
+                    <a href="#" class="edit-post-btn" title="Sửa"><i class="fas fa-edit"></i></a>
+                    <a href="#" title="Xóa"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="post-edit-view" class="hidden">
+    <div class="page-header edit-header">
+        <h1>Viết bài mới</h1>
+        <div class="header-actions">
+            <a href="#" (click)="onBackToList()" id="back-to-list-btn" class="btn btn-secondary">Quay lại</a>
+            <a href="#" class="btn btn-tertiary">Lưu nháp</a>
+            <a href="#" class="btn btn-primary">Xuất bản</a>
+        </div>
+    </div>
+
+    <div class="edit-form-container">
+        <div class="form-group">
+            <label for="post-title">Tiêu đề bài viết</label>
+            <input type="text" id="post-title" class="form-control-dark"
+                placeholder="VD: Lợi ích của việc đi bộ mỗi ngày">
+        </div>
+        <div class="form-group">
+            <label>Ảnh bìa</label>
+            <div class="image-upload">
+                <button class="btn btn-secondary"><i class="fas fa-upload"></i> Tải ảnh lên</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="post-content">Nội dung bài viết</label>
+            <textarea id="post-content" class="form-control-editor" rows="15"
+                placeholder="Soạn thảo nội dung tại đây..."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="post-tags">Tags / Chuyên mục</label>
+            <input type="text" id="post-tags" class="form-control-dark"
+                placeholder="dinh dưỡng, tập luyện, sức khỏe tinh thần">
+        </div>
+    </div>
+</div>

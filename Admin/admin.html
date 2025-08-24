@@ -66,77 +66,85 @@
             const pageContent = document.getElementById('page-content');
 
             /**
-         * HÀM TÁI SỬ DỤNG ĐỂ THIẾT LẬP SỰ KIỆN CHO BẤT KỲ MODAL NÀO
-         * @param {string} triggerSelector - ID của nút bấm để mở modal (ví dụ: '#add-expert-btn')
-         * @param {string} modalSelector - ID của modal để hiển thị (ví dụ: '#add-expert-modal')
-         */
+             * HÀM TÁI SỬ DỤNG ĐỂ THIẾT LẬP SỰ KIỆN CHO MODAL
+             */
             const setupModalEvents = (triggerSelector, modalSelector) => {
                 const triggerButton = pageContent.querySelector(triggerSelector);
                 const modal = pageContent.querySelector(modalSelector);
-
-                if (!triggerButton || !modal) return; // Dừng lại nếu không tìm thấy nút hoặc modal
+                if (!triggerButton || !modal) return;
 
                 const closeModalBtn = modal.querySelector('.close-btn');
                 const cancelBtn = modal.querySelector('.cancel-btn');
 
                 const openModal = (e) => {
-                    e.preventDefault(); // Ngăn link '#' nhảy trang
+                    e.preventDefault();
                     modal.classList.add('active');
                 }
                 const closeModal = () => modal.classList.remove('active');
 
-                // Gán sự kiện cho các nút
                 triggerButton.addEventListener('click', openModal);
                 if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
                 if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
-
-                // Đóng modal khi click ra ngoài
                 modal.addEventListener('click', (event) => {
                     if (event.target === modal) closeModal();
                 });
             };
 
-            const initDashboardChart = () => {
-                const canvas = pageContent.querySelector('#usersChart');
-                if (!canvas) return;
-                const labels = ["19-06", "21-06", "23-06", "25-06", "27-06", "29-06", "01-07", "03-07", "05-07", "07-07", "09-07", "11-07", "13-07", "15-07", "17-07", "19-07", "21-07", "23-07", "25-07", "27-07"];
-                const data = {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Người dùng mới',
-                        backgroundColor: 'rgba(138, 77, 118, 0.1)',
-                        borderColor: 'rgba(138, 77, 118, 1)',
-                        data: [18, 12, 16, 22, 19, 23, 22, 21, 8, 12, 14, 18, 15, 14, 16, 18, 15, 10, 16, 21],
-                        fill: true,
-                        tension: 0.4,
-                        pointBackgroundColor: 'rgba(138, 77, 118, 1)',
-                        pointRadius: 4,
-                    }]
+            /**
+             * HÀM THIẾT LẬP SỰ KIỆN CHO TRANG BÀI VIẾT (POSTS)
+             */
+            const setupPostPageEvents = () => {
+                const postListView = pageContent.querySelector('#post-list-view');
+                const postEditView = pageContent.querySelector('#post-edit-view');
+                const addPostBtn = pageContent.querySelector('#add-post-btn');
+                const backToListBtn = pageContent.querySelector('#back-to-list-btn');
+                const editPostBtns = pageContent.querySelectorAll('.edit-post-btn');
+
+                if (!postListView || !postEditView) return;
+
+                const showEditView = (e) => {
+                    e.preventDefault();
+                    postListView.classList.add('hidden');
+                    postEditView.classList.remove('hidden');
                 };
-                const config = { type: 'line', data: data, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } } };
-                new Chart(canvas, config);
+
+                const showListView = (e) => {
+                    e.preventDefault();
+                    postEditView.classList.add('hidden');
+                    postListView.classList.remove('hidden');
+                };
+
+                if (addPostBtn) addPostBtn.addEventListener('click', showEditView);
+                if (backToListBtn) backToListBtn.addEventListener('click', showListView);
+                editPostBtns.forEach(btn => btn.addEventListener('click', showEditView));
             };
 
+            const initDashboardChart = () => { /* ... code vẽ biểu đồ của bạn ... */ };
+
+            /**
+             * HÀM CHÍNH ĐỂ TẢI NỘI DUNG
+             */
             const loadContent = (url) => {
                 fetch(url)
                     .then(response => response.text())
                     .then(html => {
                         pageContent.innerHTML = html;
 
+                        // KIỂM TRA VÀ CHẠY LOGIC TƯƠNG ỨNG CHO TỪNG TRANG
                         if (url.includes('index.html')) {
                             initDashboardChart();
                         } else if (url.includes('experts.html')) {
-                            // Thiết lập modal cho trang chuyên gia
                             setupModalEvents('#add-expert-btn', '#add-expert-modal');
                         } else if (url.includes('users.html')) {
-                            // 👇 BỔ SUNG: Thiết lập modal cho trang người dùng 👇
                             setupModalEvents('#add-user-btn', '#add-user-modal');
+                        } else if (url.includes('posts.html')) {
+                            setupPostPageEvents();
                         }
                     })
                     .catch(err => console.error('Failed to load page: ', err));
             };
 
-
+            // Gán sự kiện click cho các link trong sidebar
             links.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -155,6 +163,7 @@
                 });
             });
 
+            // Tải trang mặc định khi vào
             loadContent('index.html');
         });
     </script>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao diện Chat - LadyHeath</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-pink: #ea4c89;
+            --brand-pink-dark: #d94680;
+            --background-light: #f8f8f8;
+            --background-white: #ffffff;
+            --border-color: #f0f0f0;
+            --text-dark: #333333;
+            --text-light: #999999;
+            --text-online: #28a745;
+            --message-sent-bg: #ea4c89;
+            --message-received-bg: #f1f1f1;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-light);
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            color: var(--text-dark);
+        }
+
+        .chat-layout {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* --- Sidebar --- */
+        .chat-sidebar {
+            width: 80px;
+            background-color: var(--background-white);
+            border-right: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: var(--brand-pink);
+        }
+
+        .sidebar-icon {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .contact-avatar:hover {
+            border-color: #ddd;
+        }
+
+        .contact-avatar.active {
+            border-color: var(--brand-pink);
+        }
+
+        /* --- Main Chat Window --- */
+        .chat-main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--background-white);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: #fafafa;
+        }
+
+        .chat-header .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .chat-header .user-info .name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .chat-header .user-info .status {
+            font-size: 0.8rem;
+            color: var(--text-online);
+        }
+
+        .chat-header .status::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--text-online);
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .message-area {
+            flex-grow: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            max-width: 70%;
+        }
+
+        .message-group .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            align-self: flex-end;
+        }
+
+        .message-bubble {
+            padding: 0.75rem 1.25rem;
+            border-radius: 20px;
+            line-height: 1.6;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+
+        /* Received Messages */
+        .message-group.received {
+            align-self: flex-start;
+        }
+
+        .message-group.received .message-bubble {
+            background-color: var(--message-received-bg);
+            border-top-left-radius: 5px;
+        }
+
+        /* Sent Messages */
+        .message-group.sent {
+            align-self: flex-end;
+        }
+
+        .message-group.sent .message-bubble {
+            background-color: var(--message-sent-bg);
+            color: white;
+            border-top-right-radius: 5px;
+        }
+
+        .message-group.sent .message-time {
+            text-align: right;
+        }
+
+        /* Message Input */
+        .message-input-area {
+            padding: 1rem 2rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--background-white);
+        }
+
+        .message-input-form {
+            display: flex;
+            align-items: center;
+            background-color: var(--text-dark);
+            border-radius: 12px;
+            padding: 0.5rem;
+        }
+
+        .message-input-form input {
+            flex-grow: 1;
+            border: none;
+            background: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            color: white;
+        }
+
+        .message-input-form input:focus {
+            outline: none;
+        }
+
+        .message-input-form input::placeholder {
+            color: #777;
+        }
+
+        .message-input-form .send-btn {
+            background: var(--brand-pink);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .message-input-form .send-btn:hover {
+            background-color: var(--brand-pink-dark);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="chat-layout">
+        <aside class="chat-sidebar">
+            <div class="logo">
+                <i class="fas fa-heart-pulse"></i>
+            </div>
+            <div class="sidebar-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="contact-list">
+                <img src="https://i.pravatar.cc/150?img=1" alt="Contact Avatar" class="contact-avatar active">
+                <img src="https://i.pravatar.cc/150?img=5" alt="Contact Avatar" class="contact-avatar">
+                <img src="https://i.pravatar.cc/150?img=32" alt="Contact Avatar" class="contact-avatar">
+                <img src="https://i.pravatar.cc/150?img=8" alt="Contact Avatar" class="contact-avatar">
+                <img src="https://i.pravatar.cc/150?img=12" alt="Contact Avatar" class="contact-avatar">
+            </div>
+        </aside>
+
+        <main class="chat-main">
+            <header class="chat-header">
+                <img src="https://i.pravatar.cc/150?img=1" alt="Avatar" class="avatar">
+                <div class="user-info">
+                    <div class="name">Dr. Evelyn Reed</div>
+                    <div class="status">Online</div>
+                </div>
+            </header>
+
+            <div class="message-area">
+                <div class="message-group received">
+                    <img src="https://i.pravatar.cc/150?img=1" alt="Avatar" class="avatar">
+                    <div>
+                        <div class="message-bubble">
+                            Hello! How can I help you today?
+                        </div>
+                        <div class="message-time">10:25 AM</div>
+                    </div>
+                </div>
+
+                <div class="message-group sent">
+                    <div>
+                        <div class="message-bubble">
+                            Hi Dr. Reid, I have a question about my recent test results.
+                        </div>
+                        <div class="message-time">10:27 AM</div>
+                    </div>
+                </div>
+
+                <div class="message-group received">
+                    <img src="https://i.pravatar.cc/150?img=1" alt="Avatar" class="avatar">
+                    <div>
+                        <div class="message-bubble">
+                            Of course. I'm here to help. What are your concerns?
+                        </div>
+                        <div class="message-time">10:28 AM</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="message-input-area">
+                <div class="message-input-form">
+                    <input type="text" placeholder="Type your message...">
+                    <button class="send-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

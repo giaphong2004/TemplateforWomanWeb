@@ -4,149 +4,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thư viện Sức khỏe - AuraHealth</title>
+    <title>Thư viện Sức khỏe - LadyHeath (Thiết kế mới)</title>
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --pink-primary: #e91e63;
-            --pink-light: #fce4ec;
-            --text-dark: #333;
-            --text-light: #6c757d;
-            --border-color: #e8e8e8;
-            --white: #ffffff;
-            --body-bg: #fdfcff;
             --brand-pink: #e91e63;
             --brand-pink-dark: #c2185b;
             --brand-pink-light: #fce4ec;
             --brand-purple: #9c27b0;
-            --brand-purple-light: #f3e5f5;
             --text-dark: #343a40;
             --text-muted: #6c757d;
+            --border-color: #dee2e6;
+            --body-bg: #f9fafb;
+            /* Hơi xám nhẹ */
         }
-
-        /* --- Header --- */
 
         body {
             font-family: 'Roboto', sans-serif;
+            background-color: var(--body-bg);
         }
 
-        /* --- Custom Styles for Components --- */
-        .text-pink {
-            color: var(--brand-pink) !important;
+        /* --- Header --- */
+        .navbar {
+            transition: all 0.3s;
         }
 
-        .text-pink-dark {
-            color: var(--brand-pink-dark) !important;
-        }
-
-        .text-purple-dark {
-            color: var(--brand-purple) !important;
-        }
-
-        .btn-pink {
-            background-color: var(--brand-pink);
-            color: white;
-            border-color: var(--brand-pink);
-        }
-
-        .btn-pink:hover {
-            background-color: var(--brand-pink-dark);
-            border-color: var(--brand-pink-dark);
-            color: white;
-        }
-
-        .btn-outline-pink {
-            color: var(--brand-pink);
-            border-color: var(--brand-pink);
-        }
-
-        .btn-outline-pink:hover {
-            background-color: var(--brand-pink);
-            color: white;
-        }
-
-        .bg-pink-light {
+        /* --- Hero Section --- */
+        .hero-section {
             background-color: var(--brand-pink-light);
+            padding: 4rem 0;
+            text-align: center;
         }
 
-        /* Hover vào .nav-item.dropdown thì hiện menu */
-        .nav-item.dropdown:hover .dropdown-menu {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .nav-item :hover {
-            color: var(--brand-pink);
-            font-weight: 600;
-            background-color: white;
-        }
-
-        /* --- Main Content --- */
-        .page-title {
-            font-size: 3.5rem;
+        .hero-section .page-title {
+            font-size: 3rem;
             font-weight: 700;
-            margin: 2rem 0;
+            color: var(--brand-pink-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-section .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Search Bar */
         .search-bar {
             position: relative;
-            margin-bottom: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .search-input {
             width: 100%;
-            padding: 1rem 3rem 1rem 1.5rem;
+            padding: 1rem 3.5rem 1rem 1.5rem;
             border-radius: 50px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #ddd;
             font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
         .search-input:focus {
             outline: none;
-            border-color: var(--pink-primary);
-            box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.1);
+            border-color: var(--brand-pink);
+            box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.15);
         }
 
         .search-btn {
             position: absolute;
-            right: 10px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
-            background: none;
+            background: var(--brand-pink);
             border: none;
-            color: var(--text-light);
-            font-size: 1.2rem;
+            color: white;
+            font-size: 1rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
         }
 
-        /* Category Nav */
-        .category-nav .nav-link {
-            color: var(--text-light);
+        .search-btn:hover {
+            background-color: var(--brand-pink-dark);
+        }
+
+        /* Category Pills */
+        .category-pills {
+            padding: 2rem 0;
+        }
+
+        .category-pills .nav-link {
+            color: var(--text-muted);
             font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-bottom: 3px solid transparent;
-            transition: color 0.3s, border-color 0.3s;
+            border-radius: 50px;
+            margin: 0 0.25rem;
+            transition: all 0.3s;
         }
 
-        .category-nav .nav-link:hover {
-            color: var(--text-dark);
+        .category-pills .nav-link.active {
+            background-color: var(--brand-pink);
+            color: white;
         }
 
-        .category-nav .nav-link.active {
-            color: var(--pink-primary);
-            border-bottom-color: var(--pink-primary);
+        .category-pills .nav-link:hover {
+            color: var(--brand-pink-dark);
         }
 
         /* Section Styling */
@@ -154,299 +128,159 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 3rem 0 1.5rem 0;
+            margin-bottom: 1.5rem;
         }
 
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 600;
         }
 
         .view-all-link {
             text-decoration: none;
-            color: var(--pink-primary);
-            font-weight: 500;
-        }
-
-        /* Article & Tool Cards */
-        .card {
-            border: none;
-            background: none;
-            margin-bottom: 1rem;
-        }
-
-        .card-img-container {
-            border-radius: 15px;
-            overflow: hidden;
-            background-color: var(--pink-light);
-        }
-
-        .card-img-top {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover .card-img-top {
-            transform: scale(1.05);
-        }
-
-        .card-body {
-            padding: 1rem 0;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
+            color: var(--brand-pink);
             font-weight: 600;
-            margin-bottom: 0.25rem;
         }
 
-        .card-title a {
+        /* Improved Article Cards */
+        .article-card {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+        }
+
+        .article-card .card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .article-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .article-card .category-tag {
+            display: inline-block;
+            background-color: var(--brand-pink-light);
+            color: var(--brand-pink-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .article-card .card-title a {
             text-decoration: none;
             color: var(--text-dark);
             transition: color 0.3s;
         }
 
-        .card-title a:hover {
-            color: var(--pink-primary);
+        .article-card .card-title a:hover {
+            color: var(--brand-pink);
         }
 
-        .card-text {
-            color: var(--text-light);
+        .article-card .card-text {
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
-        .tool-card .card-img-container {
-            height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        .tool-card .card-title {
-            font-size: 1.2rem;
-        }
-
-        /* --- Footer --- */
-        /* Footer */
-        .footer-brand {
-            color: var(--brand-pink);
+        .article-card .card-footer {
+            background-color: transparent;
+            border-top: 1px solid var(--border-color);
+            padding: 1rem 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Header -->
     <header>
         <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
-            <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="index.html">
-                    <svg class="text-pink me-2" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
-                        viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                        </path>
-                    </svg>
-                    <span class="fs-4 fw-bold text-pink-dark">LadyHeath</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mainNavbar">
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="caculator.html" id="navbarDropdown" role="button"
-                                aria-expanded="false">
-                                Công cụ tính toán
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="menstrual.html">Tính ngày kinh nguyệt</a></li>
-                                <li><a class="dropdown-item" href="ovulation.html">Tính ngày rụng trứng</a></li>
-                                <li><a class="dropdown-item" href="pregnancy_due_date.html">Tính ngày dự sinh</a></li>
-                                <li><a class="dropdown-item" href="pregnancy_test.html">Tính ngày thử thai</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="libraryheath.html">Sức khỏe A-Z</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#experts">Chuyên gia</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#faq">Hỏi & Đáp</a></li>
-                    </ul>
-                    <form class="d-flex me-lg-2 mb-2 mb-lg-0" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
-                    </form>
-                    <div class="d-flex align-items-center">
-                        <a href="login_signup.html" class="btn btn-sm btn-outline-secondary me-2">Đăng nhập</a>
-                        <a href="login_signup.html" class="btn btn-sm btn-pink">Đăng ký</a>
-                    </div>
-                </div>
-            </div>
         </nav>
     </header>
 
-    <!-- Main Content -->
-    <main class="container ">
-        <h1 class="text-center page-title">Health Library</h1>
-
-        <!-- Search Bar -->
-        <div class="search-bar">
-            <input type="text" class="search-input" placeholder="Explore by category, or search for a topic">
-            <button class="search-btn"><i class="fas fa-search"></i></button>
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="page-title">Thư viện Sức khỏe</h1>
+            <p class="page-subtitle">Nơi cung cấp kiến thức toàn diện, được kiểm duyệt bởi các chuyên gia hàng đầu để
+                đồng hành cùng bạn trên hành trình chăm sóc sức khỏe.</p>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Tìm kiếm chủ đề bạn quan tâm...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
         </div>
+    </section>
 
-        <!-- Category Navigation -->
-        <nav class="nav justify-content-center category-nav">
-            <a class="nav-link active" href="#">All topics</a>
-            <a class="nav-link" href="#">Your Cycle</a>
-            <a class="nav-link" href="#">Pregnancy</a>
-            <a class="nav-link" href="#">Health 360</a>
-            <a class="nav-link" href="#">LGTBQ+</a>
-        </nav>
+    <main class="container">
+        <ul class="nav nav-pills justify-content-center category-pills">
+            <li class="nav-item"><a class="nav-link active" href="#">Tất cả</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Chu kỳ của bạn</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Mang thai</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Sức khỏe 360</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Làm mẹ</a></li>
+        </ul>
 
-        <!-- Section: Your Cycle -->
-        <section>
+        <section class="mt-4">
             <div class="section-header">
-                <h2 class="section-title">Your Cycle</h2>
-                <a href="#" class="view-all-link">View all &rarr;</a>
+                <h2 class="section-title">Chủ đề nổi bật</h2>
+                <a href="#" class="view-all-link">Xem tất cả &rarr;</a>
             </div>
             <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-img-container">
-                            <img src="https://placehold.co/400x300/f8bbd0/e91e63?text=Cycle" class="card-img-top"
-                                alt="Hình minh họa chu kỳ">
-                        </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="article-card">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2120&auto=format&fit=crop"
+                            class="card-img-top" alt="Hình minh họa Yoga">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="#">What Is a Normal Period?</a></h5>
-                            <p class="card-text">Learn the signs of a healthy cycle.</p>
+                            <span class="category-tag">Sức khỏe 360</span>
+                            <h5 class="card-title"><a href="#">10 Lợi ích của Yoga đối với sức khỏe phụ nữ</a></h5>
+                            <p class="card-text">Khám phá cách yoga giúp cải thiện cả thể chất và tinh thần, từ việc
+                                giảm căng thẳng đến tăng cường sự dẻo dai.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span>Bởi <strong>Dr. An Nguyễn</strong></span>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-img-container">
-                            <img src="https://placehold.co/400x300/f48fb1/e91e63?text=Ovulation" class="card-img-top"
-                                alt="Hình minh họa rụng trứng">
-                        </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="article-card">
+                        <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/483329ybE/anh-mo-ta.png"
+                            class="card-img-top" alt="Hình minh họa dinh dưỡng">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="#">Ovulation Symptoms: 10 Signs</a></h5>
-                            <p class="card-text">How to know when you're ovulating.</p>
+                            <span class="category-tag">Mang thai</span>
+                            <h5 class="card-title"><a href="#">Dinh dưỡng thiết yếu trong 3 tháng đầu thai kỳ</a></h5>
+                            <p class="card-text">Những loại thực phẩm mẹ bầu nên bổ sung để đảm bảo sự phát triển khỏe
+                                mạnh cho thai nhi trong giai đoạn đầu.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span>Bởi <strong>Chuyên gia Dinh dưỡng</strong></span>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-img-container">
-                            <img src="https://placehold.co/400x300/f06292/e91e63?text=Cramps" class="card-img-top"
-                                alt="Hình minh họa đau bụng kinh">
-                        </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="article-card">
+                        <img src="https://images.unsplash.com/photo-1580130281329-8d3e3289a05b?q=80&w=2070&auto=format&fit=crop"
+                            class="card-img-top" alt="Hình minh họa chu kỳ">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="#">How to Relieve Period Cramps</a></h5>
-                            <p class="card-text">Tips and tricks for pain relief.</p>
+                            <span class="category-tag">Chu kỳ của bạn</span>
+                            <h5 class="card-title"><a href="#">Hiểu rõ hơn về các giai đoạn của chu kỳ kinh nguyệt</a>
+                            </h5>
+                            <p class="card-text">Một hướng dẫn chi tiết về những thay đổi của cơ thể và hormone trong
+                                suốt chu kỳ hàng tháng của bạn.</p>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-img-container">
-                            <img src="https://placehold.co/400x300/ec407a/e91e63?text=Health" class="card-img-top"
-                                alt="Hình minh họa sức khỏe">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#">Your Cycle and Mental Health</a></h5>
-                            <p class="card-text">The connection between hormones and mood.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section: Tools & Calculators -->
-        <section>
-            <div class="section-header">
-                <h2 class="section-title">Tools & Calculators</h2>
-                <a href="#" class="view-all-link">View all &rarr;</a>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card tool-card">
-                        <div class="card-img-container" style="background-color: #e1f5fe;">
-                            <h5 class="card-title"><a href="#">Máy tính rụng trứng</a></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card tool-card">
-                        <div class="card-img-container" style="background-color: #e8f5e9;">
-                            <h5 class="card-title"><a href="#">Máy tính thử thai</a></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card tool-card">
-                        <div class="card-img-container" style="background-color: #fff3e0;">
-                            <h5 class="card-title"><a href="#">Máy tính dự sinh</a></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section: Pregnancy -->
-        <section>
-            <div class="section-header">
-                <h2 class="section-title">Pregnancy</h2>
-                <a href="#" class="view-all-link">View all &rarr;</a>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-img-container">
-                            <img src="https://placehold.co/400x300/ce93d8/9c27b0?text=Pregnancy" class="card-img-top"
-                                alt="Hình minh họa mang thai">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#">Early Signs of Pregnancy</a></h5>
-                            <p class="card-text">Could you be pregnant? Check the symptoms.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-img-container">
-                            <img src="https://placehold.co/400x300/b39ddb/9c27b0?text=Baby" class="card-img-top"
-                                alt="Hình minh họa em bé">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#">Your Baby's Development</a></h5>
-                            <p class="card-text">Week-by-week guide to your baby's growth.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-img-container">
-                            <img src="https://placehold.co/400x300/9575cd/9c27b0?text=Nutrition" class="card-img-top"
-                                alt="Hình minh họa dinh dưỡng">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#">Pregnancy Nutrition Guide</a></h5>
-                            <p class="card-text">What to eat for a healthy pregnancy.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <div class="card-img-container">
-                            <img src="https://placehold.co/400x300/7e57c2/9c27b0?text=Fitness" class="card-img-top"
-                                alt="Hình minh họa thể dục">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#">Staying Fit During Pregnancy</a></h5>
-                            <p class="card-text">Safe exercises for every trimester.</p>
+                        <div class="card-footer">
+                            <span>Bởi <strong>BS. Trần Thị B</strong></span>
                         </div>
                     </div>
                 </div>
@@ -455,49 +289,10 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white pt-5 pb-4">
-        <div class="container text-center text-md-start">
-            <div class="row text-center text-md-start">
-                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 fw-bold footer-brand">LadyHeath</h5>
-                    <p>Hướng dẫn được cá nhân hóa của bạn về sức khỏe, cung cấp theo dõi chu kỳ, thông tin sức khỏe từ
-                        chuyên gia
-                        và một cộng đồng hỗ trợ.</p>
-                </div>
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 fw-bold">Tính năng</h5>
-                    <p><a href="#cycle-calculator" class="text-white text-decoration-none">Theo dõi chu kỳ</a></p>
-                    <p><a href="#articles" class="text-white text-decoration-none">Sức khỏe A-Z</a></p>
-                    <p><a href="#experts" class="text-white text-decoration-none">Chuyên gia</a></p>
-                    <p><a href="#faq" class="text-white text-decoration-none">Hỏi & Đáp</a></p>
-                </div>
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 fw-bold">Pháp lý</h5>
-                    <p><a href="#" class="text-white text-decoration-none">Chính sách bảo mật</a></p>
-                    <p><a href="#" class="text-white text-decoration-none">Điều khoản dịch vụ</a></p>
-                    <p><a href="#" class="text-white text-decoration-none">Tuyên bố miễn trừ trách nhiệm</a></p>
-                </div>
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 fw-bold">Bản tin</h5>
-                    <p>Đăng ký nhận bản tin của chúng tôi để nhận các mẹo sức khỏe mới nhất.</p>
-                    <form class="d-flex">
-                        <input type="email" class="form-control form-control-sm me-2" placeholder="Email của bạn">
-                        <button class="btn btn-sm btn-pink">Đăng ký</button>
-                    </form>
-                </div>
-            </div>
-            <hr class="my-4">
-            <div class="text-center">
-                <p>&copy; 2024 LadyHeath. Bảo lưu mọi quyền.</p>
-            </div>
-        </div>
+    <footer class="bg-dark text-white mt-5 pt-5 pb-4">
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

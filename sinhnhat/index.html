@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* CSS cho toàn bộ trang */
+        :root {
+            --bg-gradient-start: #d4c2fc;
+            --bg-gradient-end: #f5cedc;
+            --title-color: #fff;
+            --title-glow: #ff8fab;
+            --text-color: #5b5b5b;
+            --box-bg: rgba(255, 255, 255, 0.75);
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(45deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Container chính */
+        .container {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* Tiêu đề chính với hiệu ứng neon */
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 4rem;
+            color: var(--title-color);
+            text-shadow: 0 0 10px var(--title-glow), 0 0 20px var(--title-glow), 0 0 40px var(--title-glow);
+            margin-bottom: 25px;
+            /* Giảm khoảng cách dưới */
+            opacity: 0;
+            animation: fadeIn 2s ease-out forwards;
+        }
+
+        /* Ảnh tròn - Đã được tách ra */
+        .circular-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 0 auto 25px auto;
+            /* Căn giữa và tạo khoảng cách */
+            display: block;
+            opacity: 0;
+            animation: fadeIn 2s ease-out 0.5s forwards;
+            /* Xuất hiện sau tiêu đề */
+        }
+
+        /* Wrapper cho nội dung chính (chỉ còn lời chúc) */
+        .content-wrapper {
+            background: var(--box-bg);
+            padding: 30px 40px;
+            /* Tăng padding ngang */
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            opacity: 0;
+            animation: fadeIn 2s ease-out 1s forwards;
+            /* Xuất hiện sau ảnh */
+        }
+
+        /* Lời chúc */
+        p {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            text-align: center;
+            /* Căn giữa lời chúc */
+            line-height: 1.6;
+            margin: 0;
+            min-height: 100px;
+            /* Điều chỉnh lại chiều cao tối thiểu */
+        }
+
+        /* Hiệu ứng trái tim bay */
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 1.5rem;
+            color: var(--title-glow);
+            animation: floatUp 10s linear infinite;
+            z-index: 1;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-120vh);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+
+            .circular-image {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 20px;
+            }
+
+            .content-wrapper {
+                padding: 20px;
+            }
+
+            p {
+                font-size: 1rem;
+                min-height: 120px;
+                /* Điều chỉnh cho mobile */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="hearts-container"></div>
+
+    <div class="container">
+
+        <h1>Chúc Mừng Sinh Nhật</h1>
+
+        <!-- 1. THAY ẢNH CỦA BẠN VÀO ĐÂY -->
+        <img src="img/huong1.jpg" alt="Ảnh kỷ niệm" class="circular-image">
+
+        <div class="content-wrapper">
+            <!-- 2. LỜI CHÚC SẼ ĐƯỢC GÕ RA Ở ĐÂY -->
+            <p id="wish-text">Nhân ngày tiểu thư Diễm Hương tốt nghiệp cũng như sinh nhật lần thứ 21 em xin phép gởi tới
+                chị đôi lời. Em tự hào về những nỗ lực và thành công của chị! Chúc chị luôn rạng rỡ, hạnh phúc và chinh
+                phục mọi ước mơ phía trước.Mong rằng tuổi mới sẽ mang đến cho chị thật nhiều may mắn, thành công và
+                những điều tuyệt vời nhất. Luôn xinh đẹp, rạng rỡ và yêu đời chị nhé!🥳🎂</p>
+        </div>
+
+    </div>
+
+    <script>
+        const heartsContainer = document.getElementById('hearts-container');
+
+        // Hàm tạo trái tim bay lên
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '♥';
+
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            heart.style.opacity = Math.random();
+            heart.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
+
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 10000);
+        }
+
+        // Tạo trái tim liên tục
+        setInterval(createHeart, 300);
+
+        // --- HIỆU ỨNG GÕ CHỮ ---
+        window.addEventListener('load', () => {
+            const wishElement = document.getElementById('wish-text');
+            if (wishElement) {
+                const originalText = wishElement.innerText; // Lấy nội dung gốc
+                let i = 0;
+                wishElement.innerText = ''; // Xóa nội dung để bắt đầu gõ
+
+                function typeWriter() {
+                    if (i < originalText.length) {
+                        wishElement.innerHTML += originalText.charAt(i);
+                        i++;
+                        // Tốc độ gõ chữ (miligiây)
+                        setTimeout(typeWriter, 60);
+                    }
+                }
+
+                // Bắt đầu gõ sau khi hộp nội dung xuất hiện (delay 1s + 0.5s)
+                setTimeout(typeWriter, 1500);
+            }
+        });
+    </script>
+</body>
+
+</html>

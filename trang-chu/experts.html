@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đội ngũ Chuyên gia - LadyHeath</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-pink: #e91e63;
+            --brand-pink-dark: #c2185b;
+            --brand-pink-light: #fce4ec;
+            --text-dark: #343a40;
+            --text-muted: #6c757d;
+            --border-color: #dee2e6;
+            --body-bg: #f9fafb;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--body-bg);
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            background-color: var(--brand-pink-light);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-section .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--brand-pink-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-section .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3.5rem 1rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--brand-pink);
+            box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.15);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--brand-pink);
+            border: none;
+            color: white;
+            font-size: 1rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .search-btn:hover {
+            background-color: var(--brand-pink-dark);
+        }
+
+        /* Filter Pills */
+        .filter-pills {
+            padding-top: 2rem;
+        }
+
+        .filter-pills .nav-link {
+            border-radius: 50px;
+            padding: 0.5rem 1.25rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin: 0 0.25rem 0.5rem 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-pills .nav-link:hover {
+            border-color: var(--brand-pink);
+            color: var(--brand-pink);
+        }
+
+        .filter-pills .nav-link.active {
+            background-color: var(--brand-pink);
+            color: white;
+            border-color: var(--brand-pink);
+        }
+
+        /* --- Expert Cards --- */
+        .expert-card {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .expert-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .expert-avatar img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid var(--white);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .expert-info {
+            flex-grow: 1;
+        }
+
+        .expert-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .expert-specialty {
+            color: var(--brand-pink);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .expert-bio {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .expert-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .expert-actions .btn {
+            flex-grow: 1;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn-outline-pink {
+            color: var(--brand-pink);
+            border-color: var(--brand-pink);
+        }
+
+        .btn-outline-pink:hover {
+            background-color: var(--brand-pink);
+            color: white;
+        }
+
+        .btn-pink {
+            background-color: var(--brand-pink);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="py-3 bg-white shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <svg class="text-pink me-2" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                    viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                    </path>
+                </svg>
+                <span class="fs-4 fw-bold text-pink-dark">LadyHeath</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <a href="#" class="btn btn-sm btn-outline-secondary me-2">Đăng nhập</a>
+                <a href="#" class="btn btn-sm btn-pink">Đăng ký</a>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="page-title">Đội ngũ Chuyên gia</h1>
+            <p class="page-subtitle">Kết nối với các chuyên gia y tế đáng tin cậy, sẵn sàng lắng nghe và tư vấn cho
+                hành trình sức khỏe của bạn.</p>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Tìm kiếm chuyên gia theo tên hoặc chuyên khoa...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <div class="container">
+        <ul class="nav nav-pills justify-content-center filter-pills mb-5">
+            <li class="nav-item"><a class="nav-link active" href="#">Tất cả</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Sản phụ khoa</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Dinh dưỡng</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Tâm lý</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Chăm sóc sau sinh</a></li>
+        </ul>
+
+        <div class="row g-5">
+            <div class="col-md-6 col-lg-4">
+                <div class="expert-card">
+                    <div class="expert-avatar">
+                        <img src="https://i.pravatar.cc/150?img=1" alt="Bác sĩ Trần Thị B">
+                    </div>
+                    <div class="expert-info">
+                        <h4 class="expert-name">Bác sĩ Trần Thị B</h4>
+                        <p class="expert-specialty">Bác sĩ Sản phụ khoa</p>
+                        <p class="expert-bio">Hơn 15 năm kinh nghiệm tại Bệnh viện Từ Dũ, chuyên sâu về theo dõi
+                            thai kỳ và các bệnh lý phụ khoa phức tạp.</p>
+                    </div>
+                    <div class="expert-actions">
+                        <a href="detail-experts.html" class="btn btn-outline-pink">Xem hồ sơ</a>
+                        <a href="#" class="btn btn-pink">Nhắn tin</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="expert-card">
+                    <div class="expert-avatar">
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Bác sĩ Hoàng Văn E">
+                    </div>
+                    <div class="expert-info">
+                        <h4 class="expert-name">Bác sĩ Hoàng Văn E</h4>
+                        <p class="expert-specialty">Chuyên gia Dinh dưỡng</p>
+                        <p class="expert-bio">Chuyên gia hàng đầu về dinh dưỡng cho mẹ và bé, giúp xây dựng chế độ
+                            ăn uống khoa học và lành mạnh.</p>
+                    </div>
+                    <div class="expert-actions">
+                        <a href="detail-experts.html" class="btn btn-outline-pink">Xem hồ sơ</a>
+                        <a href="#" class="btn btn-pink">Nhắn tin</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="expert-card">
+                    <div class="expert-avatar">
+                        <img src="https://i.pravatar.cc/150?img=32" alt="Nữ hộ sinh Mai P.">
+                    </div>
+                    <div class="expert-info">
+                        <h4 class="expert-name">Nữ hộ sinh Mai P.</h4>
+                        <p class="expert-specialty">Chăm sóc sau sinh</p>
+                        <p class="expert-bio">Kinh nghiệm thực tế trong việc chăm sóc và tư vấn cho các bà mẹ trong
+                            giai đoạn phục hồi sau sinh.</p>
+                    </div>
+                    <div class="expert-actions">
+                        <a href="detail-experts.html" class="btn btn-outline-pink">Xem hồ sơ</a>
+                        <a href="#" class="btn btn-pink">Nhắn tin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white pt-5 pb-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2025 LadyHeath. Bảo lưu mọi quyền.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

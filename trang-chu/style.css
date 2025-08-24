@@ -1,0 +1,287 @@
+/* ---- Cài đặt chung & Biến màu (Tông Hồng) ---- */
+:root {
+    --bg-main: #fff;
+    --bg-secondary: #f0f2f5;
+    --bg-chat-window: #FFF5F8; /* Màu nền khung chat hồng rất nhạt */
+    --border-color: #ced0d4;
+    --color-primary: #050505;
+    --color-secondary: #65676b;
+    --color-accent: #E83E8C; /* Màu nhấn chính là màu hồng đậm */
+    --active-item-bg: #FDE7F3; /* Nền của mục đang chọn là hồng nhạt */
+    --received-bubble-bg: #e4e6eb;
+    --sent-bubble-bg: var(--color-accent); /* Tin nhắn gửi đi có màu hồng đậm */
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--color-primary);
+    overflow: hidden;
+}
+
+/* ---- Layout chính ---- */
+.messenger-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* ---- Cột Sidebar (bên trái) ---- */
+.sidebar {
+    width: 360px;
+    min-width: 360px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+}
+
+.sidebar-header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.sidebar-header .menu-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--bg-secondary);
+    cursor: pointer;
+}
+
+.sidebar-search {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-secondary);
+    margin: 0 16px;
+    padding: 8px 12px;
+    border-radius: 20px;
+}
+
+.sidebar-search i {
+    color: var(--color-secondary);
+    margin-right: 8px;
+}
+
+.sidebar-search input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 15px;
+}
+
+.chat-list {
+    list-style: none;
+    padding: 8px 8px;
+    margin: 0;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+}
+
+.chat-item:hover {
+    background-color: var(--bg-secondary);
+}
+
+.chat-item.active {
+    background-color: var(--active-item-bg);
+}
+
+.chat-item img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.chat-name {
+    font-weight: 600;
+}
+
+.chat-message {
+    color: var(--color-secondary);
+    font-size: 14px;
+}
+
+.unread-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    border: 2px solid var(--bg-main);
+    margin-left: auto;
+}
+
+.chat-item.active .unread-dot {
+    border-color: var(--active-item-bg);
+}
+
+/* ---- Cửa sổ chat (bên phải) ---- */
+.chat-window {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-chat-window);
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-main);
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+}
+
+.contact-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.contact-name {
+    font-weight: 600;
+}
+
+.contact-status {
+    color: var(--color-secondary);
+    font-size: 13px;
+}
+
+.chat-actions i {
+    font-size: 20px;
+    color: var(--color-accent);
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.message-area {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.message-group {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 4px;
+    max-width: 70%;
+}
+
+.message-group.received {
+    align-self: flex-start;
+}
+
+.message-group.sent {
+    align-self: flex-end;
+}
+
+.message-group img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-right: 8px;
+    margin-top: 4px;
+}
+
+.message-bubbles {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.message-bubble {
+    padding: 8px 12px;
+    border-radius: 18px;
+    max-width: fit-content;
+}
+.message-bubble p {
+    margin: 0;
+}
+
+.message-group.received .message-bubble {
+    background-color: var(--received-bubble-bg);
+}
+
+.message-group.sent .message-bubble {
+    background-color: var(--sent-bubble-bg);
+    color: white;
+}
+
+.message-group.sent .message-bubbles {
+    align-items: flex-end;
+}
+
+
+/* ---- Khu vực nhập liệu ---- */
+.chat-input-area {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: var(--bg-main);
+}
+
+.chat-input-area i {
+    font-size: 20px;
+    color: var(--color-accent);
+    cursor: pointer;
+}
+
+.input-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.message-input {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 0 12px;
+    margin: 0 12px;
+}
+
+.message-input input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 8px 0;
+    font-size: 15px;
+}
+
+.message-input i {
+    margin-left: 8px;
+}
+
+/* Thay icon like/send thành màu hồng */
+.send-action .fa-thumbs-up {
+    color: var(--color-accent);
+}
